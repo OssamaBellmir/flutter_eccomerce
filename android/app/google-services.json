@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "599950198358",
+    "project_id": "eccomerce-app-ossam",
+    "storage_bucket": "eccomerce-app-ossam.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599950198358:android:7c25cf49d724e6cdc69df7",
+        "android_client_info": {
+          "package_name": "com.example.eccomerce_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7YCSUC521fqBTpQblvJj2w6Qb2LQ5q2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
