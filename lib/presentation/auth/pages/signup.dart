@@ -1,20 +1,28 @@
 import 'package:eccomerce_app/common/widgets/button/basic_app_button.dart';
-import 'package:eccomerce_app/common/helpr/navigator/app_navigator.dart';
+import 'package:eccomerce_app/common/helper/navigator/app_navigator.dart';
+import 'package:eccomerce_app/data/auth/models/user_creation_req.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'entre_password.dart';
-import 'package:eccomerce_app/common/widgets/button/appbar/app_bar.dart';
+import 'package:eccomerce_app/common/widgets/appbar/app_bar.dart';
 import 'siginin.dart';
+import 'package:eccomerce_app/presentation/auth/pages/gender_and_age_selection.dart';
 
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+  SignUpPage({super.key});
+
+  final TextEditingController _firstNameCon = TextEditingController();
+  final TextEditingController _lastNameCon = TextEditingController();
+  final TextEditingController _emailCon = TextEditingController();
+  final TextEditingController _passwordCon = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const BasicAppbar(hideBack: true),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
+
         child: Column(
           children: [
             _siginText(context),
@@ -44,25 +52,35 @@ class SignUpPage extends StatelessWidget {
   }
 
   Widget _firstNameField(BuildContext context) {
-    return const TextField(
+    return TextField(
+      // On a enlevé le 'const'
+      controller: _firstNameCon, // <-- Ajout du contrôleur
       decoration: const InputDecoration(hintText: 'First Name'),
     );
   }
 
   Widget _lastNameField(BuildContext context) {
-    return const TextField(
+    return TextField(
+      // On a enlevé le 'const'
+      controller: _lastNameCon, // <-- Ajout du contrôleur
       decoration: const InputDecoration(hintText: 'Last Name'),
     );
   }
 
   Widget _emailField(BuildContext context) {
-    return const TextField(
+    return TextField(
+      // On a enlevé le 'const'
+      controller: _emailCon, // <-- Ajout du contrôleur
       decoration: const InputDecoration(hintText: 'Enter Email'),
     );
   }
 
   Widget _passwordField(BuildContext context) {
-    return const TextField(
+    return TextField(
+      // On a enlevé le 'const'
+      controller: _passwordCon, // <-- Ajout du contrôleur
+      obscureText:
+          true, // <-- Bonus: pour cacher le mot de passe avec des points
       decoration: const InputDecoration(hintText: 'Enter Password'),
     );
   }
@@ -70,7 +88,19 @@ class SignUpPage extends StatelessWidget {
   Widget _continueButton(BuildContext context) {
     return BasicAppButton(
       onPressed: () {
-        AppNavigator.push(context, const EntrePasswordPage());
+        AppNavigator.push(
+          context,
+          GenderAndAgeSelectionPage(
+            userCreationReq: UserCreationReq(
+              firstName: _firstNameCon.text,
+              lastName: _lastNameCon.text,
+              email: _emailCon.text,
+              password: _passwordCon.text,
+              gender: '',
+              age: '',
+            ),
+          ),
+        );
       },
       title: 'Continue',
     );
@@ -85,7 +115,7 @@ class SignUpPage extends StatelessWidget {
             text: 'Sign In',
             recognizer: TapGestureRecognizer()
               ..onTap = () {
-                AppNavigator.push(context, const SignInPage());
+                AppNavigator.push(context, SignInPage());
               },
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),

@@ -1,13 +1,16 @@
 import 'package:eccomerce_app/common/widgets/button/basic_app_button.dart';
-import 'package:eccomerce_app/common/helpr/navigator/app_navigator.dart';
+import 'package:eccomerce_app/common/helper/navigator/app_navigator.dart';
+import 'package:eccomerce_app/data/auth/models/user_sigin_req.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'entre_password.dart';
-import 'package:eccomerce_app/common/widgets/button/appbar/app_bar.dart';
+import 'package:eccomerce_app/common/widgets/appbar/app_bar.dart';
 import 'signup.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({super.key});
+  SignInPage({super.key});
+
+  final TextEditingController _emailCon = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +41,9 @@ class SignInPage extends StatelessWidget {
   }
 
   Widget _emailField(BuildContext context) {
-    return const TextField(
+    return TextField(
+      // <-- Retire le 'const'
+      controller: _emailCon, // <-- AJOUTE CETTE LIGNE
       decoration: const InputDecoration(hintText: 'Enter Email'),
     );
   }
@@ -46,7 +51,10 @@ class SignInPage extends StatelessWidget {
   Widget _continueButton(BuildContext context) {
     return BasicAppButton(
       onPressed: () {
-        AppNavigator.push(context, const EntrePasswordPage());
+        AppNavigator.push(
+          context,
+          EntrePasswordPage(signinReq: UserSiginReq(email: _emailCon.text)),
+        );
       },
       title: 'Continue',
     );
@@ -61,7 +69,7 @@ class SignInPage extends StatelessWidget {
             text: 'Create One',
             recognizer: TapGestureRecognizer()
               ..onTap = () {
-                AppNavigator.push(context, const SignUpPage());
+                AppNavigator.push(context, SignUpPage());
               },
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
