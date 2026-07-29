@@ -5,6 +5,7 @@ import 'package:eccomerce_app/common/widgets/button/basic_app_button.dart';
 import 'package:eccomerce_app/common/widgets/button/basic_reactive_button.dart';
 import 'package:eccomerce_app/core/usecase/usecase.dart';
 import 'package:eccomerce_app/domain/auth/usecases/signin.dart';
+import 'package:eccomerce_app/presentation/home/pages/home.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:eccomerce_app/common/widgets/appbar/app_bar.dart';
@@ -37,7 +38,9 @@ class EntrePasswordPage extends StatelessWidget {
                 ScaffoldMessenger.of(context).showSnackBar(snackbar);
               }
 
-              if (state is ButtonSuccessState) {}
+              if (state is ButtonSuccessState) {
+                AppNavigator.pushAndRemove(context, const HomePage());
+              }
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

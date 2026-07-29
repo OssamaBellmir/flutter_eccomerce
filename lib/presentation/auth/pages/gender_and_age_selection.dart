@@ -173,12 +173,10 @@ class GenderAndAgeSelectionPage extends StatelessWidget {
               onPressed: () {
                 userCreationReq.gender = context
                     .read<GenderSelectionCubit>()
-                    .selectedIndex
-                    .toString();
+                    .selectedIndex;
                 userCreationReq.age = context
                     .read<AgeSelectionCubit>()
                     .selectedAge;
-
                 context.read<ButtonStateCubit>().execute(
                   usecase: SignupUseCase(),
                   params: userCreationReq,

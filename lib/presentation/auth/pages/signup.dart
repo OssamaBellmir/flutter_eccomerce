@@ -96,7 +96,7 @@ class SignUpPage extends StatelessWidget {
               lastName: _lastNameCon.text,
               email: _emailCon.text,
               password: _passwordCon.text,
-              gender: '',
+              gender: 0,
               age: '',
             ),
           ),
